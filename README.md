@@ -73,11 +73,11 @@ Os gráficos mostram a distribuição percentual de ganhos e despesas por catego
 
 ### Gráfico de Categorias
 
-*Imagem ilustrativa de um gráfico de categorias gerado pelo sistema.*
+![Tela do Gráfico](images/graficos.png)
 
 ### Histórico de Transações
 
-*Imagem ilustrativa do histórico de transações filtrado por data.*
+![Tela do Histórico](images/historico.png)
 
 ## Contribuição
 
