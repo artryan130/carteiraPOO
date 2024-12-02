@@ -30,11 +30,11 @@ O projeto é estruturado com classes e organização modular, cada módulo tem s
 
 1. Clone o repositório:
    ```bash
-   git clone https://https://github.com/artryan130/CampoMinadoPOO
+   git clone https://https://https://github.com/artryan130/carteiraPOO
 
 2. Navegue até o diretório do projeto:
    ```bash
-   cd JogoCampoMinadoPOO
+   cd Carteira
 
 3. Execute o jogo:
    ```bash
