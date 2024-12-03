@@ -65,37 +65,51 @@ while True:
         print("Escolha a categoria do ganho:")
         for idx, categoria in enumerate(SistemaFinanceiro.categorias_ganhos, start=1):
             print(f"[{idx}] {categoria}")
-        opcao_categoria = int(input("Digite o número da categoria: "))
-
-        if 1 <= opcao_categoria <= len(SistemaFinanceiro.categorias_ganhos):
-            categoria = SistemaFinanceiro.categorias_ganhos[opcao_categoria - 1]
-            valor = float(input("Digite o valor do ganho: "))
-            if valor > 0:
-                transacao = Ganho(valor, categoria)
-                sistema.usuario_atual.adicionar_transacao(transacao)
-                print("Ganho adicionado com sucesso!")
+        
+        try:
+            opcao_categoria = int(input("Digite o número da categoria: "))
+            if 1 <= opcao_categoria <= len(SistemaFinanceiro.categorias_ganhos):
+                categoria = SistemaFinanceiro.categorias_ganhos[opcao_categoria - 1]
+                
+                try:
+                    valor = float(input("Digite o valor do ganho: "))
+                    if valor > 0:
+                        transacao = Ganho(valor, categoria)
+                        sistema.usuario_atual.adicionar_transacao(transacao)
+                        print("Ganho adicionado com sucesso!")
+                    else:
+                        print("O valor do ganho deve ser maior que zero.")
+                except ValueError:
+                    print("O valor deve ser um número válido.")
             else:
-                print("O valor do ganho deve ser maior que zero.")
-        else:
-            print("Categoria inválida. Tente novamente.")
+                print("Categoria inválida. Tente novamente.")
+        except ValueError:
+            print("Opção inválida. Digite um número correspondente à categoria.")
 
     elif escolha == "2":  # Adicionar despesa
         print("Escolha a categoria da despesa:")
         for idx, categoria in enumerate(SistemaFinanceiro.categorias_despesas, start=1):
             print(f"[{idx}] {categoria}")
-        opcao_categoria = int(input("Digite o número da categoria: "))
-
-        if 1 <= opcao_categoria <= len(SistemaFinanceiro.categorias_despesas):
-            categoria = SistemaFinanceiro.categorias_despesas[opcao_categoria - 1]
-            valor = float(input("Digite o valor da despesa: "))
-            if valor > 0:
-                transacao = Despesa(valor, categoria)
-                sistema.usuario_atual.adicionar_transacao(transacao)
-                print("Despesa adicionada com sucesso!")
+        
+        try:
+            opcao_categoria = int(input("Digite o número da categoria: "))
+            if 1 <= opcao_categoria <= len(SistemaFinanceiro.categorias_despesas):
+                categoria = SistemaFinanceiro.categorias_despesas[opcao_categoria - 1]
+                
+                try:
+                    valor = float(input("Digite o valor da despesa: "))
+                    if valor > 0:
+                        transacao = Despesa(valor, categoria)
+                        sistema.usuario_atual.adicionar_transacao(transacao)
+                        print("Despesa adicionada com sucesso!")
+                    else:
+                        print("O valor da despesa deve ser maior que zero.")
+                except ValueError:
+                    print("O valor deve ser um número válido.")
             else:
-                print("O valor da despesa deve ser maior que zero.")
-        else:
-            print("Categoria inválida. Tente novamente.")
+                print("Categoria inválida. Tente novamente.")
+        except ValueError:
+            print("Opção inválida. Digite um número correspondente à categoria.")
 
     elif escolha == "3":
         saldo = sistema.usuario_atual.calcular_saldo()
