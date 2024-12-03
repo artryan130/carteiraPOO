@@ -66,36 +66,50 @@ class Usuario:
     def gerar_grafico(self):
         categorias_despesas = {}
         categorias_ganhos = {}
-
+    
         # Separar valores de despesas e ganhos por categoria
         for transacao in self.transacoes:
             if isinstance(transacao, Despesa):
                 categorias_despesas[transacao.categoria] = categorias_despesas.get(transacao.categoria, 0) + transacao.valor
             elif isinstance(transacao, Ganho):  # Supondo que 'Ganho' seja a classe para receitas
                 categorias_ganhos[transacao.categoria] = categorias_ganhos.get(transacao.categoria, 0) + transacao.valor
-
+    
+        def gerar_legenda(categorias):
+            legendas = []
+            for categoria, valor in categorias.items():
+                legendas.append(f"{categoria}: R$ {valor:.2f}")
+            return legendas
+    
         # Plotar despesas
         if categorias_despesas:
-            plt.figure(figsize=(10, 5))
+            plt.figure(figsize=(12, 6))
             plt.subplot(1, 2, 1)
-            plt.pie(categorias_despesas.values(), labels=categorias_despesas.keys(), autopct='%1.1f%%')
+            valores = list(categorias_despesas.values())
+            labels = list(categorias_despesas.keys())
+            plt.pie(valores, labels=None, autopct='%1.1f%%')
             plt.title('Despesas por Categoria')
+            legendas_despesas = gerar_legenda(categorias_despesas)
+            plt.legend(legendas_despesas, title="Categorias", loc="best", bbox_to_anchor=(0.85, 0.5))
         else:
             print("Nenhuma despesa registrada para gerar gráfico.")
-
+    
         # Plotar ganhos
         if categorias_ganhos:
             plt.subplot(1, 2, 2)
-            plt.pie(categorias_ganhos.values(), labels=categorias_ganhos.keys(), autopct='%1.1f%%')
+            valores = list(categorias_ganhos.values())
+            labels = list(categorias_ganhos.keys())
+            plt.pie(valores, labels=None, autopct='%1.1f%%')
             plt.title('Ganhos por Categoria')
+            legendas_ganhos = gerar_legenda(categorias_ganhos)
+            plt.legend(legendas_ganhos, title="Categorias", loc="best", bbox_to_anchor=(0.85, 0.5))
         else:
             print("Nenhum ganho registrado para gerar gráfico.")
-
+    
         # Mostrar gráficos
         if categorias_despesas or categorias_ganhos:
             plt.tight_layout()
             plt.show()
-
+            
     def mostrar_historico(self, data_inicial, data_final):
         historico = []
         for transacao in self.transacoes:
