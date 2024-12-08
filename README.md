@@ -15,6 +15,7 @@ Um sistema financeiro desenvolvido em Python, com foco em controle de ganhos e d
 O projeto é estruturado com classes e organização modular, cada módulo tem sua função específica:
 
 - `Transacao`: Classe base abstrata que representa uma transação financeira.
+- `Interface`: Classe base abstrata.
 - `Ganho`: Representa um ganho financeiro, herdando da classe `Transacao`.
 - `Despesa`: Representa uma despesa financeira, herdando da classe `Transacao`.
 - `Usuario`: Gerencia os dados de um usuário, incluindo suas transações.
@@ -63,10 +64,11 @@ Os gráficos mostram a distribuição percentual de ganhos e despesas por catego
 
 ## Estrutura de Arquivos
 
-- **Transacao**: Classe abstrata para representar uma transação.
+- **Transacao**: Classe para representar uma transação.
 - **Ganho e Despesa**: Subclasses que implementam transações específicas.
 - **Usuario**: Gerencia dados e transações de um usuário.
 - **SistemaFinanceiro**: Controla a lógica principal do sistema.
+- **Interface.py**: Classe abstrata.
 - **main.py**: Ponto de entrada do programa.
 
 ## Imagens do Sistema
