@@ -85,7 +85,7 @@ Os gráficos mostram a distribuição percentual de ganhos e despesas por catego
 
 ## Fluxograma do projeto
 
-
+![Fluxograma do projeto](images/fluxogramaCarteira.jpg)
 
 ## Contribuição
 
