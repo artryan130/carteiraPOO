@@ -81,6 +81,12 @@ Os gráficos mostram a distribuição percentual de ganhos e despesas por catego
 
 ![Tela do Histórico](images/historico.png)
 
+## Diagrama UML
+
+## Fluxograma do projeto
+
+
+
 ## Contribuição
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests no repositório.
