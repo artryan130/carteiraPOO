@@ -1,6 +1,6 @@
 import os
-from Usuario import Usuario
 import json
+from Usuario import Usuario
 
 class SistemaFinanceiro:
     """
@@ -8,18 +8,20 @@ class SistemaFinanceiro:
     e carregamento de categorias de ganhos e despesas.
     """
 
+    # Categorias serão carregadas uma única vez como atributos de classe
+    categorias_ganhos = []
+    categorias_despesas = []
+
     def __init__(self):
         """
         Inicializa o sistema financeiro com o estado inicial.
         """
         self.usuario_atual: Usuario = None  # Usuário atualmente logado.
-        self.categorias_ganhos: list[str] = []  # Lista de categorias de ganhos.
-        self.categorias_despesas: list[str] = []  # Lista de categorias de despesas.
 
     def login(self, nome: str, senha: str) -> None:
         """
         Realiza o login do usuário, verificando se o arquivo JSON correspondente existe.
-        
+
         :param nome: Nome do usuário.
         :param senha: Senha do usuário.
         """
@@ -31,15 +33,24 @@ class SistemaFinanceiro:
             print("Usuário ou senha incorretos. Tente novamente.")  # Mensagem de erro.
             self.usuario_atual = None  # Reseta o usuário atual.
 
-    def carregar_categorias(self) -> None:
+    @classmethod
+    def carregar_categorias(cls) -> None:
         """
         Carrega categorias de ganhos e despesas a partir de um arquivo JSON.
         """
         caminho: str = "categorias.json"  # Caminho do arquivo de categorias.
-        if os.path.exists(caminho):
+
+        if not os.path.exists(caminho):
+            print("Erro: O arquivo 'categorias.json' não foi encontrado.")
+            return
+
+        try:
             with open(caminho, "r", encoding="utf-8") as arquivo:
-                categorias: dict = json.load(arquivo)  # Lê o conteúdo do arquivo JSON.
-                self.categorias_ganhos = categorias.get("categorias_ganhos", [])  # Obtém categorias de ganhos.
-                self.categorias_despesas = categorias.get("categorias_despesas", [])  # Obtém categorias de despesas.
-        else:
-            print("Arquivo de categorias não encontrado. Verifique se 'categorias.json' existe.")  # Mensagem de erro.
+                categorias = json.load(arquivo)  # Lê o JSON e converte em dicionário
+                cls.categorias_ganhos = categorias.get("categorias_ganhos", [])  # Obtém categorias de ganhos
+                cls.categorias_despesas = categorias.get("categorias_despesas", [])  # Obtém categorias de despesas
+        except json.JSONDecodeError:
+            print("Erro: O arquivo 'categorias.json' contém dados inválidos.")
+
+# Carregar categorias automaticamente ao iniciar o sistema
+SistemaFinanceiro.carregar_categorias()
